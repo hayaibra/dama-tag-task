@@ -6,10 +6,10 @@ import { auth } from "@/lib";
 import { onAuthStateChanged } from "firebase/auth";
 import { useQuery } from "@tanstack/react-query";
 import getPostsQuery from "@/store/posts/calls";
-import Loading from "./components/loading";
-import PostCard from "./components/post-card";
-import WelcomeFn from "./components/welcome-fn";
-import { LoginBtn, LogoutBtn, SignupBtn } from "./components/btns";
+import Loading from "@/components/loading";
+import { LoginBtn, LogoutBtn, SignupBtn } from "@/components/btns";
+import WelcomeFn from "@/components/welcome-fn";
+import PostCard from "@/components/post-card";
 
 export default function Home() {
   const [user, setUser] = useState<null | { email: string }>(null);

@@ -1,6 +1,5 @@
 import { apiEndpoints } from "@/data/api-endpoints";
 import { BackendClient } from "@/lib";
-import { UseQueryOptions } from "@tanstack/react-query";
 
 interface PostDetailsProps {
   id?: string | number;

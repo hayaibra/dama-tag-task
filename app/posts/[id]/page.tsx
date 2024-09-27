@@ -1,9 +1,8 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
 import { getPostsQuery } from "@/store/posts/calls"; // Assume this is a function to fetch post by ID
-import Loading from "@/app/components/loading";
 import { useRouter } from "next/navigation";
-// import Loading from "@/components/loading";
+import Loading from "@/components/loading";
 
 const PostDetail = ({ params }: { params: { id: string } }) => {
   const { data: post, isLoading } = useQuery({

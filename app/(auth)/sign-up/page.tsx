@@ -1,16 +1,18 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { useForm } from "react-hook-form";
-import { useCreateUserWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { auth } from "@/lib";
 import { useRouter } from "next/navigation";
+import { ROUTES } from "@/data";
 import {
   AuthBox,
   EmailInput,
   PasswordInput,
-} from "@/app/components/auth-components";
-import { SubmitBtn } from "@/app/components/btns";
-import { ROUTES } from "@/data";
+} from "@/components/auth-components";
+import { SubmitBtn } from "@/components/btns";
+import ErrorNotification from "@/components/error-notification";
+import { useCreateFireBaseUser } from "@/hooks/create-fire-base-user";
 
 interface FormData {
   email: string;
@@ -18,9 +20,17 @@ interface FormData {
 }
 
 const SignUp = () => {
-  const [createUserWithEmailAndPassword] =
-    useCreateUserWithEmailAndPassword(auth);
   const router = useRouter();
+  const { error, createUserWithEmailAndPassword, loading } =
+    useCreateFireBaseUser(auth, {
+      onSuccess: () => {
+        router.push(ROUTES.signIn);
+        reset();
+      },
+      onError: () => {
+        reset();
+      },
+    });
   const {
     register,
     handleSubmit,
@@ -28,31 +38,28 @@ const SignUp = () => {
     reset,
   } = useForm<FormData>();
 
-  const onSubmit = async (data: FormData) => {
-    try {
-      const { email, password } = data;
-      await createUserWithEmailAndPassword(email, password);
-      router.push(ROUTES.signIn);
-      reset();
-    } catch (e) {
-      console.error(e);
-    }
+  const onSubmit = (data: FormData) => {
+    const { email, password } = data;
+    createUserWithEmailAndPassword(email, password);
   };
 
   return (
-    <AuthBox
-      title="Sign Up"
-      question="Already have an account?"
-      link={ROUTES.signIn}
-      linkTitle="SignIn"
-    >
-      <form onSubmit={handleSubmit(onSubmit)} noValidate>
-        <EmailInput register={register} errors={errors} />
-        <PasswordInput register={register} errors={errors} />
+    <>
+      <AuthBox
+        title="Sign Up"
+        question="Already have an account?"
+        link={ROUTES.signIn}
+        linkTitle="SignIn"
+      >
+        {error && <ErrorNotification message={error.message} />}
+        <form onSubmit={handleSubmit(onSubmit)} noValidate>
+          <EmailInput register={register} errors={errors} />
+          <PasswordInput register={register} errors={errors} />
 
-        <SubmitBtn btnTitle="Sign Up" />
-      </form>
-    </AuthBox>
+          <SubmitBtn btnTitle="Sign Up" loading={loading} />
+        </form>
+      </AuthBox>
+    </>
   );
 };
 

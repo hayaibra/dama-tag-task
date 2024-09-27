@@ -10,7 +10,7 @@ const LogoutBtn = () => {
   const handleLogout = () => {
     localStorage.removeItem("User");
     auth.signOut();
-    router.push(ROUTES.signIn);
+    router.push(ROUTES.home);
   };
 
   return (

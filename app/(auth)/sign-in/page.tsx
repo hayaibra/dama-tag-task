@@ -5,14 +5,13 @@ import {
   AuthBox,
   EmailInput,
   PasswordInput,
-} from "@/app/components/auth-components";
-import { SubmitBtn } from "@/app/components/btns";
-// import ErrorNotification from "@/app/components/error-notification";
-// import ErrorNotification from "@/app/components/error-notification";
+} from "@/components/auth-components";
+import { SubmitBtn } from "@/components/btns";
+import ErrorNotification from "@/components/error-notification";
 import { ROUTES } from "@/data";
+import { useLoginFireBaseUser } from "@/hooks/login-fire-base-user";
 import { auth } from "@/lib";
 import { useRouter } from "next/navigation";
-import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 
 interface FormData {
@@ -21,27 +20,29 @@ interface FormData {
 }
 
 const SignIn = () => {
-  const [signInWithEmailAndPassword] = useSignInWithEmailAndPassword(auth);
   const router = useRouter();
+  const { error, signInWithEmailAndPassword, loading } = useLoginFireBaseUser(
+    auth,
+    {
+      onSuccess: () => {
+        router.push(ROUTES.home);
+        reset();
+      },
+      onError: () => {
+        reset();
+      },
+    }
+  );
   const {
     register,
     handleSubmit,
     formState: { errors },
     reset,
   } = useForm<FormData>();
-  const onSubmit = async (data: FormData) => {
-    try {
-      const { email, password } = data;
-      const res = await signInWithEmailAndPassword(email, password);
-      if (res?.user) {
-        const token = await res.user.getIdToken();
-        localStorage.setItem("User", token);
-      }
-      reset();
-      router.push("/");
-    } catch (e: any) {
-      console.log(e);
-    }
+
+  const onSubmit = (data: FormData) => {
+    const { email, password } = data;
+    signInWithEmailAndPassword(email, password);
   };
 
   return (
@@ -52,10 +53,11 @@ const SignIn = () => {
         link={ROUTES.signUp}
         linkTitle="Sign Up"
       >
+        {error && <ErrorNotification message={error.message} />}
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
           <EmailInput register={register} errors={errors} />
           <PasswordInput register={register} errors={errors} />
-          <SubmitBtn btnTitle="Sign In" />
+          <SubmitBtn btnTitle="Sign In" loading={loading} />
         </form>
       </AuthBox>
     </>
