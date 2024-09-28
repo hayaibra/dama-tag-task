@@ -5,12 +5,19 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 1-open terminal in vsCode
 
-2- copy this command 
+2- copy this command :
 
 ```bash
-git clone 
+git clone https://github.com/hayaibra/dama-tag-task.git
 ```
-First, run the development server:
+
+3- run this command: 
+
+```bash
+npm install
+```
+
+4-run the development server:
 
 ```bash
 npm run develop
