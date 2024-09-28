@@ -14,6 +14,16 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+##  decision I made during development
+
+I added a file called Hooks based on Firebase custom Hooks
+
+1- To facilitate the use of Firebase Hooks and track Error, Loading cases
+
+2- To be able to reuse it easily
+
+3- To facilitate reading the code
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
