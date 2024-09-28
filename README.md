@@ -2,6 +2,10 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 ## Getting Started
 
+[هقسفو 
+1-open terminal in vsCode
+
+2-from github repo copy the link of repo from code
 First, run the development server:
 
 ```bash
