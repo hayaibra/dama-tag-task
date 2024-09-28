@@ -1,7 +1,31 @@
 {
     "posts": [
-      { "id": 1, "title": "First Post", "content": "This is the content of the first post." },
-      { "id": 2, "title": "Second Post", "content": "This is the content of the second post." }
+      {
+        "id": "1",
+        "title": "The Impact of AI on Modern Web Development",
+        "content": "Artificial Intelligence is revolutionizing the web development landscape. From automating testing to optimizing code, developers are leveraging AI tools to streamline workflows and deliver smarter applications. In this post, we explore how AI is shaping the future of web development and the tools every developer should know about."
+      },
+      {
+        "id": "2",
+        "title": "The Rise of Serverless Architectures",
+        "content": "Serverless computing has been gaining traction as more companies look to simplify infrastructure management. By allowing developers to focus solely on code, without worrying about server maintenance, serverless architectures like AWS Lambda and Azure Functions are changing how we build scalable applications. In this post, we'll dive into the benefits and challenges of going serverless."
+      },
+      {
+        "id": "3",
+        "title": "How to Improve Website Performance with Next.js",
+        "content": "Next.js is known for its ability to improve performance through static site generation and server-side rendering. But what are the best practices to ensure you're making the most out of this powerful framework? In this post, we’ll discuss optimization techniques, from lazy loading to image optimization, that can help your Next.js app perform faster."
+      },
+      {
+        "id": "4",
+        "title": "Exploring the Benefits of Progressive Web Apps (PWAs)",
+        "content": "Progressive Web Apps offer a native app-like experience on the web, without the need to install anything. PWAs work offline, are fast, and enhance user engagement. In this article, we discuss how PWAs are transforming web applications and why they are essential for modern web development strategies."
+      },
+      {
+        "id": "5",
+        "title": "Understanding the Basics of GraphQL",
+        "content": "GraphQL is quickly becoming the go-to query language for APIs, offering developers a more efficient way to request and manage data. With GraphQL, you can specify exactly what data you need, reducing the payload size and speeding up queries. In this guide, we'll walk through how GraphQL works and why it’s a great alternative to REST."
+      }
     ]
+    
   }
   

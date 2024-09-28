@@ -24,7 +24,11 @@ const SignIn = () => {
   const { error, signInWithEmailAndPassword, loading } = useLoginFireBaseUser(
     auth,
     {
-      onSuccess: () => {
+      onSuccess: async (user) => {
+        if (user) {
+          const token = await user.user.getIdToken();
+          localStorage.setItem("User", token);
+        }
         router.push(ROUTES.home);
         reset();
       },
@@ -33,6 +37,7 @@ const SignIn = () => {
       },
     }
   );
+
   const {
     register,
     handleSubmit,

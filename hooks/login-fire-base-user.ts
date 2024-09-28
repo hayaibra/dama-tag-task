@@ -5,14 +5,14 @@ import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 
 export const useLoginFireBaseUser = (
   auth: Auth,
-  Options: { onSuccess?: () => void; onError?: (error: any) => void }
+  Options: { onSuccess?: (user: any) => void; onError?: (error: any) => void }
 ) => {
   const [signInWithEmailAndPassword, user, loading, error] =
     useSignInWithEmailAndPassword(auth);
   const { onSuccess = () => {}, onError = () => {} } = Options;
   useEffect(() => {
     if (user) {
-      onSuccess();
+      onSuccess(user);
     }
   }, [user]);
   useEffect(() => {
